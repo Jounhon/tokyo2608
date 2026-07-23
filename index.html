@@ -140,17 +140,31 @@
         <!-- ==================== DAY 1 ==================== -->
         <section id="content-day1" class="tab-content space-y-6">
             <div class="bg-gradient-to-r from-sky-500 to-indigo-600 rounded-2xl p-6 text-white shadow-md flex justify-between items-center flex-wrap gap-4">
-                <div>
-                    <span class="text-xs uppercase font-semibold tracking-wider bg-white/20 px-2.5 py-1 rounded-full">Day 1 ・ 2026 / 08 / 01 (六)</span>
-                    <h2 class="text-2xl font-bold mt-1">出發東京 ✕ 江戶川花火大會</h2>
-                    <p class="text-sky-100 text-sm mt-1">台中啟飛 ➔ 抵達成田 ➔ 飯店 Check-in ➔ 觀賞江戶川煙火 ➔ 上野吃喝</p>
+                
+                <!-- 第一排：日期標籤 與 時間資訊 (同一水平) -->
+                <div class="flex justify-between items-start w-full mb-3 sm:mb-5">
+                    <!-- 左側：日期標籤 -->
+                    <div class="inline-flex items-center bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold border border-white/10 flex-shrink-0">    DAY 1 ・ 2026 / 08 / 01 (六)
+                    </div>
+
+                    <!-- 右側：19:15 時間資訊 -->
+                    <div class="flex flex-col items-end text-right ml-4">
+                        <span class="text-3xl sm:text-4xl font-bold flex items-center justify-start sm:justify-end gap-2">
+                            19:15 <i class="fa-solid fa-burst text-amber-300 animate-pulse"></i>
+                        </span>
+                        <p class="text-[10px] sm:text-xs text-sky-200 font-medium tracking-wider">
+                            江戶川煙火施放時間
+                        </p>
+                    </div>
                 </div>
-                <div class="w-full sm:w-auto text-left sm:text-right flex-shrink-0 border-t border-white/10 sm:border-0 pt-4 sm:pt-0">
-                    <span class="text-3xl sm:text-4xl font-bold flex items-center justify-start sm:justify-end gap-2">
-                        19:15 <i class="fa-solid fa-burst text-amber-300 animate-pulse"></i>
-                    </span>
-                    <p class="text-[10px] sm:text-xs text-sky-200 font-medium tracking-wider">
-                        江戶川煙火施放時間
+
+                <!-- 下半部：標題與路線描述 -->
+                <div class="space-y-2">
+                    <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">
+                        出發東京 <span class="opacity-70">×</span> 江戶川花火大會
+                    </h2>
+                    <p class="text-sky-100 text-xs sm:text-sm opacity-90 leading-relaxed max-w-3xl">
+                        台中啟飛 ➔ 抵達成田 ➔ 飯店 Check-in ➔ 觀賞江戶川煙火 ➔ 上野吃喝
                     </p>
                 </div>
             </div>
