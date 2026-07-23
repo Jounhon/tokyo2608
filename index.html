@@ -74,84 +74,65 @@
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-sky-200 selection:text-sky-900">
 
-    <!-- Header with Minimalist Fireworks Canvas Background -->
+    <!-- Header -->
     <header class="relative bg-gradient-to-b from-slate-900 via-slate-800 to-sky-950 text-white overflow-hidden shadow-lg" id="headerContainer">
         <canvas id="fireworksCanvas"></canvas>
         <div class="relative z-20 max-w-5xl mx-auto px-4 py-10 sm:py-14 text-center">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-sky-200 text-xs font-medium tracking-wide backdrop-blur-md mb-4 border border-white/15">
                 <i class="fa-solid fa-wand-magic-sparkles text-amber-300"></i> 2026・8/1(六) - 8/5(三)
             </div>
-            <h1 class="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-3">
-                東京夏日長岡花火
-            </h1>
-            <div class="mt-2 text-xs text-sky-300/80 italic">
-                💡 點擊頂部橫幅任意位置可施放煙火
-            </div>
+            <h1 class="text-3xl sm:text-5xl font-bold tracking-tight text-white mb-3">東京夏日長岡花火</h1>
+            <div class="mt-2 text-xs text-sky-300/80 italic">💡 點擊頂部橫幅任意位置可施放煙火</div>
 
-            <!-- Header Quick Summary Bar -->
-            <div class="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto text-xs sm:text-sm">
-                <button onclick="selectMainTab('itinerary')" class="bg-white/10 hover:bg-white/20 border border-white/15 rounded-xl p-3 backdrop-blur-sm flex items-center justify-center gap-2 transition cursor-pointer">
-                    <i class="fa-regular fa-calendar-check text-sky-400"></i>
-                    <span class="font-medium">行程</span>
+            <!-- Header Quick Summary Bar - 集中一排佈局 -->
+            <div class="mt-8 flex flex-row justify-center items-center gap-1 sm:gap-3 max-w-4xl mx-auto overflow-x-auto no-scrollbar px-2">
+                <button onclick="selectMainTab('itinerary')" class="main-nav-btn flex-1 min-w-[65px] sm:min-w-[100px] bg-white/10 hover:bg-white/20 border border-white/15 rounded-xl py-3 px-1 backdrop-blur-sm flex flex-col items-center justify-center gap-1 transition cursor-pointer">
+                    <i class="fa-solid fa-plane-departure text-sky-400 text-base sm:text-lg"></i>
+                    <span class="nav-text font-medium text-white">行程</span>
                 </button>
-                <button onclick="selectMainTab('weather')" class="bg-white/10 hover:bg-white/20 border border-white/15 rounded-xl p-3 backdrop-blur-sm flex items-center justify-center gap-2 transition cursor-pointer">
-                    <i class="fa-solid fa-cloud-sun text-amber-400"></i>
-                    <span class="font-medium">天氣</span>
+                <button onclick="selectMainTab('weather')" class="main-nav-btn flex-1 min-w-[65px] sm:min-w-[100px] bg-white/10 hover:bg-white/20 border border-white/15 rounded-xl py-3 px-1 backdrop-blur-sm flex flex-col items-center justify-center gap-1 transition cursor-pointer">
+                    <i class="fa-solid fa-cloud-sun text-amber-400 text-base sm:text-lg"></i>
+                    <span class="nav-text font-medium text-white">天氣</span>
                 </button>
-                <button onclick="selectMainTab('checklist')" class="bg-white/10 hover:bg-white/20 border border-white/15 rounded-xl p-3 backdrop-blur-sm flex items-center justify-center gap-2 transition cursor-pointer">
-                    <i class="fa-solid fa-list-check text-indigo-400"></i>
-                    <span class="font-medium">清單備忘</span>
+                <button onclick="selectMainTab('checklist')" class="main-nav-btn flex-1 min-w-[65px] sm:min-w-[100px] bg-white/10 hover:bg-white/20 border border-white/15 rounded-xl py-3 px-1 backdrop-blur-sm flex flex-col items-center justify-center gap-1 transition cursor-pointer">
+                    <i class="fa-solid fa-list-check text-indigo-400 text-base sm:text-lg"></i>
+                    <span class="nav-text font-medium text-white">清單</span>
                 </button>
-                <button onclick="selectMainTab('currency')" class="bg-white/10 hover:bg-white/20 border border-white/15 rounded-xl p-3 backdrop-blur-sm flex items-center justify-center gap-2 transition cursor-pointer">
-                    <i class="fa-solid fa-calculator text-emerald-400"></i>
-                    <span class="font-medium">匯率</span>
+                <button onclick="selectMainTab('currency')" class="main-nav-btn flex-1 min-w-[65px] sm:min-w-[100px] bg-white/10 hover:bg-white/20 border border-white/15 rounded-xl py-3 px-1 backdrop-blur-sm flex flex-col items-center justify-center gap-1 transition cursor-pointer">
+                    <i class="fa-solid fa-calculator text-emerald-400 text-base sm:text-lg"></i>
+                    <span class="nav-text font-medium text-white">匯率</span>
+                </button>
+                <button onclick="selectMainTab('map')" class="main-nav-btn flex-1 min-w-[65px] sm:min-w-[100px] bg-white/10 hover:bg-white/20 border border-white/15 rounded-xl py-3 px-1 backdrop-blur-sm flex flex-col items-center justify-center gap-1 transition cursor-pointer">
+                    <i class="fa-solid fa-map-location-dot text-rose-400 text-base sm:text-lg"></i>
+                    <span class="nav-text font-medium text-white">地圖</span>
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- Sticky Navigation Tabs -->
-    <nav class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
+    <!-- Sticky Navigation (Only for Dates, controlled by JS) -->
+    <nav id="stickyNav" class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm transition-all duration-300">
         <div class="max-w-5xl mx-auto px-2 sm:px-4">
-            <!-- Main Category Nav Tabs -->
-            <div class="flex items-center justify-between border-b border-slate-100 overflow-x-auto no-scrollbar py-2 gap-1 sm:gap-2">
-                <button onclick="selectMainTab('itinerary')" id="main-tab-itinerary" class="main-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center gap-1.5 bg-sky-500 text-white shadow-sm">
-                    <i class="fa-regular fa-calendar-check"></i> 行程
+            <div id="dateSubTabs" class="flex space-x-1 sm:space-x-2 py-3 overflow-x-auto no-scrollbar">
+                <button onclick="switchDay('day1')" id="tab-day1" class="day-tab-btn whitespace-nowrap px-4 py-2 rounded-lg text-xs font-semibold transition-all duration-200 bg-sky-100 text-sky-800">
+                    <i class="fa-solid fa-plane-departure mr-1"></i> 8/1 (六)
                 </button>
-                <button onclick="selectMainTab('weather')" id="main-tab-weather" class="main-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center gap-1.5 text-slate-600 hover:bg-slate-100">
-                    <i class="fa-solid fa-cloud-sun text-amber-500"></i> 天氣
+                <button onclick="switchDay('day2')" id="tab-day2" class="day-tab-btn whitespace-nowrap px-4 py-2 rounded-lg text-xs font-medium transition-all duration-200 text-slate-600 hover:bg-slate-100">
+                    <i class="fa-solid fa-torii-gate mr-1"></i> 8/2 (日)
                 </button>
-                <button onclick="selectMainTab('checklist')" id="main-tab-checklist" class="main-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center gap-1.5 text-slate-600 hover:bg-slate-100">
-                    <i class="fa-solid fa-list-check text-indigo-500"></i> 清單備忘
+                <button onclick="switchDay('day3')" id="tab-day3" class="day-tab-btn whitespace-nowrap px-4 py-2 rounded-lg text-xs font-medium transition-all duration-200 text-slate-600 hover:bg-slate-100">
+                    <i class="fa-solid fa-burst mr-1"></i> 8/3 (一)
                 </button>
-                <button onclick="selectMainTab('currency')" id="main-tab-currency" class="main-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center gap-1.5 text-slate-600 hover:bg-slate-100">
-                    <i class="fa-solid fa-calculator text-emerald-500"></i> 匯率
+                <button onclick="switchDay('day4')" id="tab-day4" class="day-tab-btn whitespace-nowrap px-4 py-2 rounded-lg text-xs font-medium transition-all duration-200 text-slate-600 hover:bg-slate-100">
+                    <i class="fa-solid fa-building-ngo mr-1"></i> 8/4 (二)
                 </button>
-                <button onclick="selectMainTab('map')" id="main-tab-map" class="main-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center gap-1.5 text-slate-600 hover:bg-slate-100">
-                    <i class="fa-solid fa-map-location-dot text-rose-500"></i> 地圖連動
-                </button>
-            </div>
-
-            <!-- Date Sub-Navigation Tabs (Only shown when 行程 is active) -->
-            <div id="dateSubTabs" class="flex space-x-1 sm:space-x-2 py-2 overflow-x-auto no-scrollbar border-t border-slate-100">
-                <button onclick="switchDay('day1')" id="tab-day1" class="day-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 bg-sky-100 text-sky-800">
-                    <i class="fa-regular fa-calendar-check mr-1"></i> 8/1 (五) 出發/江戶川
-                </button>
-                <button onclick="switchDay('day2')" id="tab-day2" class="day-tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 text-slate-600 hover:bg-slate-100">
-                    <i class="fa-solid fa-torii-gate mr-1"></i> 8/2 (六) 神社/逛街
-                </button>
-                <button onclick="switchDay('day3')" id="tab-day3" class="day-tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 text-slate-600 hover:bg-slate-100">
-                    <i class="fa-solid fa-burst mr-1"></i> 8/3 (日) 長岡花火
-                </button>
-                <button onclick="switchDay('day4')" id="tab-day4" class="day-tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 text-slate-600 hover:bg-slate-100">
-                    <i class="fa-solid fa-building-ngo mr-1"></i> 8/4 (一) 上野/麻布台
-                </button>
-                <button onclick="switchDay('day5')" id="tab-day5" class="day-tab-btn px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 text-slate-600 hover:bg-slate-100">
-                    <i class="fa-solid fa-plane-arrival mr-1"></i> 8/5 (二) 返家
+                <button onclick="switchDay('day5')" id="tab-day5" class="day-tab-btn whitespace-nowrap px-4 py-2 rounded-lg text-xs font-medium transition-all duration-200 text-slate-600 hover:bg-slate-100">
+                    <i class="fa-solid fa-plane-arrival mr-1"></i> 8/5 (三)
                 </button>
             </div>
         </div>
     </nav>
+
 
     <!-- Main Content Container -->
     <main class="flex-grow max-w-5xl w-full mx-auto px-4 py-8">
@@ -490,7 +471,41 @@
 
         <!-- ==================== DAY 5 ==================== -->
         <section id="content-day5" class="tab-content hidden space-y-6">
-            <!-- ... existing day 5 code ... -->
+            <div class="bg-gradient-to-r from-slate-400 to-slate-600 rounded-2xl p-6 text-white shadow-md flex justify-between items-center flex-wrap gap-4">
+                <div>
+                    <span class="text-xs uppercase font-semibold tracking-wider bg-white/20 px-2.5 py-1 rounded-full">Day 5 ・ 2026 / 08 / 05 (二)</span>
+                    <h2 class="text-2xl font-bold mt-1">最後採買 ➔ 踏上歸途</h2>
+                    <p class="text-slate-100 text-sm mt-1">阿美橫丁 ➔ 京成上野站 ➔ 成田機場 ➔ 台中</p>
+                </div>
+                <div class="text-right">
+                    <span class="text-2xl font-bold"><i class="fa-solid fa-plane-departure"></i></span>
+                    <p class="text-xs text-slate-200">15:00 起飛</p>
+                </div>
+            </div>
+        
+            <div class="glass-panel p-5 rounded-2xl border border-slate-200">
+                <div class="flex items-start gap-4">
+                    <div class="bg-sky-100 text-sky-600 p-3 rounded-xl">
+                        <i class="fa-solid fa-bag-shopping text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-800">上午：阿美橫丁最後衝刺</h3>
+                        <p class="text-xs text-slate-500 mt-1">補齊藥妝、伴手禮，在二木菓子採買零食。中午吃一碗著名的鰻魚飯或海鮮丼。</p>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="glass-panel p-5 rounded-2xl border border-slate-200">
+                <div class="flex items-start gap-4">
+                    <div class="bg-amber-100 text-amber-600 p-3 rounded-xl">
+                        <i class="fa-solid fa-train-subway text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-800">12:20 京成上野站</h3>
+                        <p class="text-xs text-slate-500 mt-1">搭乘 Skyliner 前往成田機場（預計 13:00 抵達第二航廈）。</p>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- ==================== WEATHER ==================== -->
